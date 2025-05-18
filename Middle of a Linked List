@@ -1,0 +1,56 @@
+                             // Middle of a Linked List
+                             
+#include <iostream>
+using namespace std;
+
+// Definition of ListNode
+class ListNode {
+public:
+    int val;         // Stores the value of the node
+    ListNode* next;  // Pointer to the next node
+
+    // Constructor to initialize a node with a value
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+class Middle {  
+public:
+    // Function to find the middle node of a linked list
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slow = head;  // Slow pointer moves one step at a time
+        ListNode* fast = head;  // Fast pointer moves two steps at a time
+
+        // Loop until fast pointer reaches the end or becomes NULL
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next;       // Move slow pointer one step
+            fast = fast->next->next; // Move fast pointer two steps
+        }
+
+        return slow;  // Slow pointer will now be at the middle node
+    }
+};
+
+// Function to print the linked list from a given node
+void printList(ListNode* node) {
+    while (node) {
+        cout << node->val << " -> ";  // Print current node value
+        node = node->next;            // Move to the next node
+    }
+    cout << "NULL" << endl;  // Indicate end of the list
+}
+
+int main() {
+    // Creating a linked list: 1 -> 2 -> 3 -> 4 -> 5 -> NULL
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+    head->next->next->next->next = new ListNode(5);
+
+    Middle midFinder;  // Create an object of class Middle
+    ListNode* middle = midFinder.middleNode(head);  // Find middle node
+
+    cout << "Middle node value: " << middle->val << endl;  // Print middle node value
+
+    return 0;
+}
