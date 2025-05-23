@@ -1,0 +1,67 @@
+                                         //Stack using classes
+
+#include <iostream>
+using namespace std;
+
+class Stack {
+private:
+    int tos;
+    char* values;
+    int size;
+
+public:
+    // Constructor to initialize stack with size
+    Stack(int x) {
+        tos = -1; // Initialize top of stack
+        size = x; // Set size of the stack
+        values = new char[size]; // Dynamically allocate memory for stack
+    }
+
+    // Destructor to free the memory
+    ~Stack() {
+        delete[] values;
+    }
+
+    // Function to push elements onto the stack
+    void push(char x) {
+        if (tos == size - 1) {
+            cout << "\nStack overflow condition";
+        } else {
+            values[++tos] = x;
+        }
+    }
+
+    // Function to pop elements from the stack
+    char pop() {
+        if (tos == -1) {
+            cout << "\nStack Underflow condition";
+            return ' ';
+        } else {
+            return values[tos--];
+        }
+    }
+};
+
+int main() {
+    Stack* myStack = new Stack(10); // Create a stack of size 10
+
+    // Push elements onto the stack
+    myStack->push('B');
+    myStack->push('S');
+    myStack->push('S');
+    myStack->push('E');
+    myStack->push('3');
+    myStack->push('Z');
+
+    // Pop and print elements from the stack
+    cout << myStack->pop();
+    cout << myStack->pop();
+    cout << myStack->pop();
+    cout << myStack->pop();
+    cout << myStack->pop();
+    cout << myStack->pop();
+    cout << myStack->pop(); // This will trigger underflow
+
+    delete myStack; // Clean up memory
+    return 0;
+}
